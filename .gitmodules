@@ -1,0 +1,6 @@
+[submodule "circuit/KicadLibrary"]
+	path = circuit/KicadLibrary
+	url = https://github.com/TitechMeister/Meister-KicadLibrary
+[submodule "src/twelite/TweliteLibrary"]
+	path = src/twelite/TweliteLibrary
+	url = https://github.com/TitechMeister/Meister-TweliteLibrary

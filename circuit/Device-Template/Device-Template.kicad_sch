@@ -1,0 +1,21 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (uuid 1802056f-0fb3-47a5-b697-c1eb70d419bf)
+
+  (paper "A4")
+
+  (title_block
+    (title "I2C Generics")
+    (date "2023-06-12")
+    (rev "Rev1")
+    (company "Meister")
+  )
+
+  (lib_symbols
+  )
+
+
+  (sheet_instances
+    (path "/" (page "1"))
+  )
+)
