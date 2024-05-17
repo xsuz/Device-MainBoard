@@ -29,7 +29,8 @@
             "name": "TWELITE RED",
             "includePath": [
                 "${workspaceFolder}",
-                "${default}"
+                "${default}",
+                "${workspaceFolder}/TweliteLibrary/"
             ],
             "defines": [
                 "JN5169=5169",
