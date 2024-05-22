@@ -2,7 +2,7 @@
 #include <TWELITE>
 #include <NWK_SIMPLE>
 #include <SensorPacket.h>
-#define USE_UART0
+#define UART0
 #include "PacketSerial/PacketSerial.h"
 
 /*** Config part */
