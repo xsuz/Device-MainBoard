@@ -27,9 +27,9 @@ void setup()
 
 	auto &&nwksmpl = the_twelite.network.use<NWK_SIMPLE>();
 	nwksmpl << NWK_SIMPLE::logical_id(0x00) // set Logical ID. (0x00 means a parent device)
-			<< NWK_SIMPLE::repeat_max(3);	// can repeat a packet up to three times. (being kind of a router)
+			<< NWK_SIMPLE::repeat_max(0);	// can repeat a packet up to three times. (being kind of a router)
 	the_twelite.begin();					// start twelite!
-	ps.begin(115200);
+	Serial.begin(115200);
 }
 
 /*** loop procedure (called every event) */
@@ -39,12 +39,31 @@ void loop()
 
 void on_rx_packet(packet_rx &rx, bool_t &handled)
 {
-	uint8_t bytes[128];
-	auto packet = rx.get_payload();
-	for(int i=0;i<rx.get_length();i++){
-		bytes[i] = packet[i];
+	uint8_t buf[256];
+	auto pkt = rx.get_payload();
+	auto len = rx.get_length();
+	uint8_t buf_idx=0;
+
+	for (uint8_t i = 0; i < len; i++)
+	{
+		if (pkt[i]==0x00){
+			Serial.write(buf_idx+1);
+			for (uint8_t j = 0; j < buf_idx; j++)
+			{
+				Serial.write(buf[j]);
+			}
+			buf_idx=0;
+		}else{
+			buf[buf_idx]=pkt[i];
+			buf_idx++;
+		}
 	}
-	ps.send(bytes, rx.get_length());
+	Serial.write(buf_idx+1);
+	for (uint8_t j = 0; j < buf_idx; j++)
+	{
+		Serial.write(buf[j]);
+	}
+	Serial.write(0x00);
 }
 
 /* Copyright (C) 2019-2021 Mono Wireless Inc. All Rights Reserved. *
